@@ -5,6 +5,7 @@ from .forms import LoginForm ,UserRegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate , logout
 
+
 class UserLogin(TemplateView):
 	template_name = 'accounts/login.html'
 	def post(self,*args,**kwargs):
@@ -18,5 +19,3 @@ class UserLogin(TemplateView):
 	def get(self,*args,**kwargs):
 		forms = LoginForm()
 		return render(self.request, self.template_name, {'forms': forms,})
-
-
