@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% block content %}
 <div class="content-section">
-    <form method="post">
+    <form method="post" novalidate>
         {% csrf_token %}
        <fieldset class='form-group'>
             <legend>Sign Up</legend>
@@ -14,11 +14,11 @@
 				{{ form.password2|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Confirm Password" }}
 		</fieldset>
         <div class="form-group">
-            <button class="btn btn-primary btn-x " style="background-color: #ffb833; type=" submit ">Sign Up</button>
+            <button class="btn btn-primary" type=" submit ">Sign Up</button>
 			</div>
 		</form>
 		<div>
-			<small class="text-muted ">Already Have an account? <a href="/accounts/login ">Login Here</a>
+			<small class="text-muted ">Already Have an account? <a href="{% url 'accounts:login' %} ">Login Here</a>
 			</small> 
 		</div>
 	</div>
