@@ -7,15 +7,25 @@ from django.contrib.auth import login, authenticate , logout
 from django.urls import reverse
 
 class UserRegister(TemplateView):
+	"""
+	Register View
+	GET - get forms and render template
+	POST - register user account
+	"""
 	template_name = 'accounts/register.html'
 
 	def post(self,*args,**kwargs):
 		form = UserRegisterForm(self.request.POST)
+		
 		if form.is_valid():
 			form.save()
 			username = form.cleaned_data.get('username')
 			messages.success(self.request, f'Account created for {username}!')
 			return redirect(reverse('login'))
+
+		else:
+			messages.error(self.request, f'Username already exists!')
+
 		return render(self.request, self.template_name, {'form': form})
 
 	def get(self,*args,**kwargs): 
