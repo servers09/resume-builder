@@ -3,6 +3,7 @@
 {% block content %}
 <div class="content-section">
   <form method="post" novalidate>
+  	
     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">
@@ -13,17 +14,20 @@
     {% csrf_token %}
     <fieldset class='form-group'>
       <legend>Sign Up</legend>
-      {{ form.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }}
-      {{ form.email|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Email" }}
-      {{ form.password1|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}
-      {{ form.password2|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Confirm Password" }}
+      {{ forms.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }}
+      {{ forms.errors.username }}
+      {{ forms.email|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Email" }}
+      {{ forms.errors.email }}
+      {{ forms.password1|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}
+      {{ forms.errors.password }}
+      {{ forms.password2|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Confirm Password" }}
     </fieldset>
     <div class="form-group">
       <button class="btn btn-primary" type=" submit ">Sign Up</button>
     </div>
   </form>
   <div>
-    <small class="text-muted ">Already Have an account? <a href="{% url 'accounts:login' %} ">Login Here</a>
+    <small class="text-muted ">Already Have an account? <a href=" ">Login Here</a>
     </small> 
   </div>
 </div>

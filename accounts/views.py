@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate , logout
 from django.urls import reverse
 
+
 class UserRegister(TemplateView):
 	"""
 	Register View
@@ -15,21 +16,25 @@ class UserRegister(TemplateView):
 	template_name = 'accounts/register.html'
 
 	def post(self,*args,**kwargs):
-		form = UserRegisterForm(self.request.POST)
+		forms = UserRegisterForm(self.request.POST)
 		
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data.get('username')
-			messages.success(self.request, f'Account created for {username}!')
-			return redirect(reverse('login'))
+		if forms.is_valid():
+			user = forms.save()
+			user.set_password(forms.cleaned_data.get('password'))
+			user.save()
 
+			user = authenticate(
+					username=forms.cleaned_data.get('username'),
+					password=forms.cleaned_data.get('password')
+					)
+			messages.success(self.request, f'Account Created you may now Log in!')
+			return redirect('/accounts/login')
 		else:
-			messages.error(self.request, f'Username already exists!')
+			print(forms.errors)
 
-		return render(self.request, self.template_name, {'form': form})
+		return render(self.request, self.template_name, {'forms': forms})
 
 	def get(self,*args,**kwargs): 
-		form = UserRegisterForm()
-		return render(self.request, self.template_name, {'form': form})
-
+		forms = UserRegisterForm()
+		return render(self.request, self.template_name, {'forms': forms})
 
