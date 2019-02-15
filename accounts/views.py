@@ -36,8 +36,8 @@ class UserRegister(TemplateView):
 		form = UserRegisterForm()
 		return render(self.request, self.template_name, {'form': form})
 
-
-class UserLogin(TemplateView):
+    
+  class UserLogin(TemplateView):
 	"""
 	Login View
 	GET - get forms and render template
