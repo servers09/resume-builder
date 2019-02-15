@@ -37,11 +37,9 @@ class UserRegister(TemplateView):
 	def get(self,*args,**kwargs): 
 		form = UserRegisterForm()
 		return render(self.request, self.template_name, {'form': form})
-
-
-
-
-class UserLogin(TemplateView):
+  
+  
+  class UserLogin(TemplateView):
 	"""
 	Login View
 	GET - get forms and render template

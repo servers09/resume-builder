@@ -39,6 +39,9 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
+	"""
+	Login Validation
+	"""
 	username = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Username')}),max_length=255)
 	password = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Password'),'type':'password'}),max_length = 50,min_length=6)
 
