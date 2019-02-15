@@ -28,9 +28,7 @@ class UserRegister(TemplateView):
 					password=form.cleaned_data.get('password')
 			)
 			messages.success(self.request, f'Account Created you may now Log in!')
-			return redirect('/accounts/login')
-		else:
-			print(form.errors)
+			return redirect(reverse('accounts:login'))
 
 		return render(self.request, self.template_name, {'form': form})
 
@@ -53,9 +51,7 @@ class UserLogin(TemplateView):
 		if form.is_valid():
 			user = authenticate(username=form.cleaned_data.get('username'),password=form.cleaned_data.get('password'))
 			login(self.request,user)
-			return redirect('/builder/edit')
-		else:
-			print(form.errors)
+			return redirect(reverse('accounts:login'))
 
 		return render(self.request, self.template_name, {'form': form})
 
@@ -74,3 +70,15 @@ class Logout(TemplateView):
 	def get(self,*args,**kwargs):
 		logout(self.request)
 		return render(self.request, self.template_name, )
+
+class Logout(TemplateView):
+	"""
+	Logout View
+	GET - logout current user
+	"""
+	template_name = 'accounts/logout.html'
+
+	def get(self,*args,**kwargs):
+		logout(self.request)
+		return render(self.request, self.template_name, )
+

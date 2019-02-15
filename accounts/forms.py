@@ -12,8 +12,7 @@ class UserRegisterForm(forms.ModelForm):
 	password = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Password'),'type':'password'}),max_length = 50,min_length=6)
 	confirm = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Confirm Password'),'type':'password'}),max_length = 50,min_length=6)
 	
-
-	class Meta:
+class Meta:
 		model = User
 		fields = ('username','email','password','confirm',)
 
@@ -38,8 +37,7 @@ class UserRegisterForm(forms.ModelForm):
 		return self.cleaned_data
 
 
-
-class LoginForm(forms.Form):
+class LoginForm(forms.ModelForm):
 	"""
 	Login Validation
 	"""
