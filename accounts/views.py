@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm , LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate , logout
 from django.urls import reverse
@@ -22,8 +22,6 @@ class UserRegister(TemplateView):
 			user = form.save()
 			user.set_password(form.cleaned_data.get('password'))
 			user.save()
-			account = Account(user_id=user.id)
-			account.save()
 
 			user = authenticate(
 					username=form.cleaned_data.get('username'),
