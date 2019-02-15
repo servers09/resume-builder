@@ -16,25 +16,27 @@ class UserRegister(TemplateView):
 	template_name = 'accounts/register.html'
 
 	def post(self,*args,**kwargs):
-		forms = UserRegisterForm(self.request.POST)
+		form = UserRegisterForm(self.request.POST)
 		
-		if forms.is_valid():
-			user = forms.save()
-			user.set_password(forms.cleaned_data.get('password'))
+		if form.is_valid():
+			user = form.save()
+			user.set_password(form.cleaned_data.get('password'))
 			user.save()
+			account = Account(user_id=user.id)
+			account.save()
 
 			user = authenticate(
-					username=forms.cleaned_data.get('username'),
-					password=forms.cleaned_data.get('password')
-					)
+					username=form.cleaned_data.get('username'),
+					password=form.cleaned_data.get('password')
+			)
 			messages.success(self.request, f'Account Created you may now Log in!')
 			return redirect('/accounts/login')
 		else:
-			print(forms.errors)
+			print(form.errors)
 
-		return render(self.request, self.template_name, {'forms': forms})
+		return render(self.request, self.template_name, {'form': form})
 
 	def get(self,*args,**kwargs): 
-		forms = UserRegisterForm()
-		return render(self.request, self.template_name, {'forms': forms})
+		form = UserRegisterForm()
+		return render(self.request, self.template_name, {'form': form})
 
