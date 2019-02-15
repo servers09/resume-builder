@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib import messages
-from .forms import UserRegisterForm, LoginForm
+from .forms import UserRegisterForm , LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate , logout
 from django.urls import reverse
@@ -16,17 +16,17 @@ class UserRegister(TemplateView):
 	template_name = 'accounts/register.html'
 
 	def post(self,*args,**kwargs):
-		forms = UserRegisterForm(self.request.POST)
+		form = UserRegisterForm(self.request.POST)
 		
-		if forms.is_valid():
-			user = forms.save()
+		if form.is_valid():
+			user = form.save()
 			user.set_password(form.cleaned_data.get('password'))
 			user.save()
 
 			user = authenticate(
-					username=forms.cleaned_data.get('username'),
-					password=forms.cleaned_data.get('password')
-					)
+					username=form.cleaned_data.get('username'),
+					password=form.cleaned_data.get('password')
+			)
 			messages.success(self.request, f'Account Created you may now Log in!')
 			return redirect('/accounts/login')
 		else:
@@ -40,6 +40,7 @@ class UserRegister(TemplateView):
 
 
 
+
 class UserLogin(TemplateView):
 	"""
 	Login View
@@ -49,17 +50,17 @@ class UserLogin(TemplateView):
 	template_name = 'accounts/login.html'
 
 	def post(self,*args,**kwargs):
-		forms = LoginForm(self.request.POST)
+		form = LoginForm(self.request.POST)
 
-		if forms.is_valid():
-			user = authenticate(username=forms.cleaned_data.get('username'),password=forms.cleaned_data.get('password'))
+		if form.is_valid():
+			user = authenticate(username=form.cleaned_data.get('username'),password=form.cleaned_data.get('password'))
 			login(self.request,user)
 			return redirect('/builder/edit')
 		else:
-			print(forms.errors)
+			print(form.errors)
 
-		return render(self.request, self.template_name, {'forms': forms})
+		return render(self.request, self.template_name, {'form': form})
 
 	def get(self,*args,**kwargs):
-		forms = LoginForm()
-		return render(self.request, self.template_name, {'forms': forms,})
+		form = LoginForm()
+		return render(self.request, self.template_name, {'form': form})

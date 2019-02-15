@@ -3,6 +3,7 @@
 {% block content %}
 <div class="content-section">
   <form method="post">
+    {{ form.non_field_errors }}
     {% csrf_token %} 
     {% if messages %}
     {% for message in messages %}
@@ -13,10 +14,8 @@
     {% endif %}
     <fieldset class='form-group'>
       <legend>Log In</legend>
-      {{ forms.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }} 
-      {{ forms.errors.username }}
-      {{ forms.password|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}
-      {{ forms.errors.password }}
+      {{ form.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }} 
+      {{ form.password|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}  
     </fieldset>
     <div class="form-group">
       <button class="btn btn-primary btn-x " type="submit">Sign In</button>

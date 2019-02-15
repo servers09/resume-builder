@@ -3,7 +3,9 @@
 {% block content %}
 <div class="content-section">
   <form method="post" novalidate>
-  	
+  	{{ form.errors.username}}
+  	{{ form.errors.email}}
+  	{{ form.non_field_errors }}
     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">
@@ -14,13 +16,10 @@
     {% csrf_token %}
     <fieldset class='form-group'>
       <legend>Sign Up</legend>
-      {{ form.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }}
-      {{ form.errors.username }}
-      {{ form.email|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Email" }}
-      {{ form.errors.email }}
-      {{ form.password1|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}
-      {{ form.errors.password }}
-      {{ form.password2|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Confirm Password" }}
+      {{ form.username|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.email|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.password|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.confirm|add_class:"form-group col-md-6 mb-3" }}
     </fieldset>
     <div class="form-group">
       <button class="btn btn-primary" type=" submit ">Sign Up</button>
