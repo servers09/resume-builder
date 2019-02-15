@@ -37,7 +37,7 @@ class UserRegister(TemplateView):
 		return render(self.request, self.template_name, {'form': form})
 
     
-  class UserLogin(TemplateView):
+class UserLogin(TemplateView):
 	"""
 	Login View
 	GET - get forms and render template
@@ -51,7 +51,7 @@ class UserRegister(TemplateView):
 		if form.is_valid():
 			user = authenticate(username=form.cleaned_data.get('username'),password=form.cleaned_data.get('password'))
 			login(self.request,user)
-			return redirect(reverse('accounts:login'))
+			return redirect(reverse('home:home'))
 
 		return render(self.request, self.template_name, {'form': form})
 
