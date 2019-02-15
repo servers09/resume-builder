@@ -1,28 +1,33 @@
 {% extends "accounts/base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-
-	<div class="content-section">
-		<form method="post">
-			{% csrf_token %}
-			<fieldset class='form-group'>
-				{{ form.username.errors }}
-				
-				<legend>Sign Up</legend>
-				{{ form.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }}
-				{{ form.first_name|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:First Name" }}
-				{{ form.last_name|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Last Name" }}
-				{{ form.email|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Email" }}
-				{{ form.password1|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}
-				{{ form.password2|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Confirm Password" }}
-			</fieldset>
-			<div class="form-group">
-				<button class="btn btn-primary btn-x" type="submit">Sign Up</button>
-			</div>
-		</form>
-		<div>
-			<small class="text-muted">Already Have an account? <a href="/accounts/login">Login Here</a>
-			</small> 
-		</div>
-	</div>
+<div class="content-section">
+  <form method="post" novalidate>
+  	{{ form.errors.username}}
+  	{{ form.errors.email}}
+  	{{ form.non_field_errors }}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% csrf_token %}
+    <fieldset class='form-group'>
+      <legend>Sign Up</legend>
+      {{ form.username|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.email|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.password|add_class:"form-group col-md-6 mb-3" }}
+      {{ form.confirm|add_class:"form-group col-md-6 mb-3" }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-primary" type=" submit ">Sign Up</button>
+    </div>
+  </form>
+  <div>
+    <small class="text-muted ">Already Have an account? <a href="{% url 'accounts:login' %} ">Login Here</a>
+    </small> 
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-section">
+  <form method="post">
+    {{ form.non_field_errors }}
+    {% csrf_token %} 
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %} 
+    {% endif %}
+    <fieldset class='form-group'>
+      <legend>Log In</legend>
+      {{ form.username|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Username" }} 
+      {{ form.password|add_class:"form-group col-md-6 mb-3"|attr:"placeholder:Password" }}  
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-primary btn-x " type="submit">Sign In</button>
+    </div>
+  </form>
+  <div>
+    <small class="text-muted">Need an account? <a href="{% url 'accounts:register' %}">Register Here</a>
+    </small>
+  </div>
+</div>
+{% endblock %}
+
