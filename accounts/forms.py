@@ -38,7 +38,7 @@ class UserRegisterForm(forms.ModelForm):
 		return self.cleaned_data
 
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
 	"""
 	Login Validation
 	"""
