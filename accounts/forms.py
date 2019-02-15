@@ -38,7 +38,7 @@ class UserRegisterForm(forms.ModelForm):
 		return self.cleaned_data
 
 
-class LoginForm(forms.Form):
+class LoginForm(forms.ModelForm):
 	username = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Username')}),max_length=255)
 	password = forms.CharField(widget = forms.TextInput(attrs={'placeholder':('Password'),'type':'password'}),max_length = 50,min_length=6)
 
