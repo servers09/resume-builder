@@ -1,0 +1,32 @@
+{% extends "accounts/base.html" %} 
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+<h1>Choose a Template!</h1>
+<br>
+<p class="lead">Pick a template you like and click the template name to begin!</p>
+<br>
+
+
+      <div class="row">
+        <div class="column">
+        <form method="post">
+          {% csrf_token %} 
+            <input type="hidden" value="1" name="resume_template">
+            <button type="submit">Traditional</button>
+              <img class="img-fluid" src="{% static 'img/1.png' %}">
+        </div>
+        <div class="column">
+              <a href="/" input type="hidden" value= "2">Large</a>
+              <img class="img-fluid" src="{% static 'img/2.png' %}">
+        </div>
+        <div class="column">
+            <a href="/" input type="hidden" value= "3">
+              <img class="img-fluid" src="{% static 'img/3.png' %}">
+        </div>
+        <div class="column">
+            <a href="/" input type="hidden" value= "4">Red</a>
+              <img class="img-fluid" src="{% static 'img/4.png' %}">
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>ResumeToPDF</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                text-align: center;
+                
+            }
+            .title {
+                padding: 10px 20px 0px 20px;
+                font-size: 22px;
+                text-align: center !important;
+                /*margin-left: 40%;*/
+            }
+            .subtitle {
+                padding: 10px 20px 0px 20px;
+                font-size: 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .title span {
+                color: #007cae;
+            }
+            .basic {
+                
+                font-size: 10px;
+                text-align: center !important;
+                /*margin-left: 40%;*/
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                font-size: 10px;
+                text-align: left !important;
+                
+                /*margin-left: 40%;*/
+            }
+            .important {
+                padding: 10px 20px 0px 20px;
+                font-size: 10px;
+                text-align: left !important;
+                font-weight: bold;
+                /*margin-left: 40%;*/
+            }
+        </style>
+    </head>
+    <body>
+            
+             <p class='title'>{{ resume_form.first_name }} {{ resume_form.last_name }} </p>
+        	 <div class='basic'>
+             	{{ resume_form.birth_month }} {{ resume_form.birth_day }} {{ resume_form.birth_year }} <br/>
+             	{{ resume_form.address }}<br/> 
+             	{{ resume_form.city }} {{ resume_form.country }} {{ resume_form.zip_code }}<br/>
+           	 	{{ resume_form.phone }}  <br/>
+             	{{ resume_form.email }}<br/>
+       		 </div>
+       		 <div class='subtitle'> Summary</div>
+       		 <div class='details'>
+       		 	{{ resume_form.summary}}<br/>
+       		 </div>
+       		 <div class='subtitle'> Education</div>
+       		 <div class='details'>
+       		 	Studied <b>{{ resume_form.degree}}</b> at <br/>
+       		 	{{ resume_form.school}}<br/> 
+       		 	{{ resume_form.school_address}} , {{ resume_form.city }} {{ resume_form.country }} {{ resume_form.zip_code }} <br/>
+       		 	{{ resume_form.status}} on {{ resume_form.month_status}} {{ resume_form.year_status}} <br/>
+       		 </div>
+       		 <div class='subtitle'> Employment History</div>
+       		 <div class='details'>
+       		 	<b>{{ resume_form.job_title}}</b> at <br/>
+       		 	{{ resume_form.company_name}}<br/> 
+       		 	{{ resume_form.company_address}} , {{ resume_form.city }} {{ resume_form.country }} {{ resume_form.zip_code }} <br/>
+       		 	From : {{ resume_company_month_f}} {{ resume_form.company_year_f}} to {{ resume_form.company_month_t}} {{ resume_form.company_year_t}}<br/>
+       		 </div>
+       		 <div class='subtitle'> Hobbies</div>
+       		 <div class='details'>
+       		 	{{ resume_form.hobbies}} <br/>
+       		 </div>
+       		 <div class='subtitle'> Professional Skils</div>
+       		 <div class='details'>
+       		 	{{ resume_form.skills}}<br/>
+       		 </div>
+       		 <div class='subtitle'> Languages</div>
+       		 <div class='details'>
+       		 	{{ resume_form.languages}}<br/>
+       		 </div>
+       		 <div class='subtitle'> References</div>
+       		 <div class='details'>
+       		 	 {{ resume_form.references}}<br/>
+       		 </div>
+    </div>
+    </body>
+</html>
